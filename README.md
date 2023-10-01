@@ -1,15 +1,15 @@
-# Recommended_Food
+## Recommended_Food
 
 🍔 Software concept for generating new, related and recommended meals.
 
 ![Meals](https://github.com/sourceduty/Recommended_Food/assets/123030236/fcc1396f-7f44-4291-81c2-616dcef8dba3)
 
-CONCEPT:
+## CONCEPT
 
 1. Choose your 10 favorite meals from a searchable meal index.
 2. Generate a list of 10 new, related and recommended meals.
 
-EXAMPLE:
+## EXAMPLE
 
 My favorites:
 
