@@ -9,30 +9,45 @@
 1. Choose your 10 favorite meals from a searchable meal index.
 2. Generate a list of 10 new, related and recommended meals.
 
-## EXAMPLE
+## EXPERIMENT
 
-My favorites:
+```
+import requests
 
-1. Pizza
-2. Chicken Wings
-3. Hash Browns
-4. Poutine
-5. Macaroni & Cheese
-6. Apples
-7. Carrots
-8. White Milk
-9. French Fries
-10. Swiss Cheese
+def search_meal_by_name(meal_name):
+    search_url = f'https://www.themealdb.com/api/json/v1/1/search.php?s={meal_name}'
+    response = requests.get(search_url)
+    data = response.json()
+    return data
 
-My recommendations:
+def get_user_meals():
+    user_meals = []
+    for i in range(10):
+        meal_name = input(f"Enter the name of your favorite meal {i + 1}: ")
+        user_meals.append(meal_name)
+    return user_meals
 
-1. Spaghetti
-2. Pulled Pork
-3. Baked Potato
-4. Shepard's Pie
-5. Grilled Cheese
-6. Watermelon
-7. Carrot Juice
-8. Penne Alla Vodka
-9. Perogies
-10. Cheesy Chicken Casserole
+def get_recommendations(user_meals):
+    recommendations = []
+    for meal_name in user_meals:
+        meal_data = search_meal_by_name(meal_name)
+        if meal_data['meals']:
+            for meal in meal_data['meals']:
+                recommendation = meal['strMeal']
+                if recommendation not in user_meals and recommendation not in recommendations:
+                    recommendations.append(recommendation)
+    
+    return recommendations[:10]  # Get the top 10 unique recommendations
+
+def main():
+    print("Welcome to the Meal Recommender System!")
+    user_meals = get_user_meals()
+    recommendations = get_recommendations(user_meals)
+
+    print("\nRecommended Meals:")
+    for i, meal in enumerate(recommendations):
+        print(f"{i + 1}. {meal}")
+
+if __name__ == "__main":
+    main()
+```
